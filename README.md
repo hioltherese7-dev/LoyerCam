@@ -1,4 +1,15 @@
-﻿# LoyerCam
+﻿![Bannière LoyerCam](Documentation/banniere-loyercam.png)
+
+<div align="center">
+
+# LoyerCam
+
+**Gestion locative simplifiée | Simplified Rental Management**
+
+</div>
+
+
+# LoyerCam
 
 **Application de gestion locative | Rental Management Application**
 
