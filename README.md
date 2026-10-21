@@ -139,3 +139,45 @@ The repository contains the LoyerCam source code. Available features can be veri
 GitHub: https://github.com/hioltherese7-dev/LoyerCam
 
 **LoyerCam — Rental management made simpler.**
+
+## 🎨 Maquettes de l’application
+
+### Français
+
+Consultez les maquettes et le prototype interactif de LoyerCam sur Figma.
+
+👉 [Ouvrir les maquettes Figma de LoyerCam](https://www.figma.com/make/4tMbUXsrsKLvhnhTtHikrm/LoyerCam-application-mobile?fullscreen=1&t=V1pFmTS4UwX5jyxZ-1&code-node-id=0-6)
+
+### English
+
+Explore the LoyerCam application mockups and interactive prototype on Figma.
+
+👉 [Open LoyerCam Figma mockups](https://www.figma.com/make/4tMbUXsrsKLvhnhTtHikrm/LoyerCam-application-mobile?fullscreen=1&t=V1pFmTS4UwX5jyxZ-1&code-node-id=0-6)
+
+## 🖼️ Aperçu des maquettes / UI Mockups
+
+### 🇫🇷 Français
+
+Voici un aperçu des principales interfaces conçues pour LoyerCam avec Figma. Ces images représentent les maquettes de conception de l'application.
+
+#### Accueil
+![Maquette de l'accueil](Documentation/Screenshots/accueil.png)
+
+#### Gestion des logements
+![Maquette des logements](Documentation/Screenshots/logements.png)
+
+#### Gestion des locataires
+![Maquette des locataires](Documentation/Screenshots/locataires.png)
+
+#### Suivi des loyers
+![Maquette des loyers](Documentation/Screenshots/loyers.png)
+
+#### Gestion des impayés
+![Maquette des impayés](Documentation/Screenshots/impayes.png)
+
+#### Quittances
+![Maquette des quittances](Documentation/Screenshots/quittances.png)
+
+### 🇬🇧 English
+
+Here is a preview of the main LoyerCam interfaces designed with Figma. These images represent the application's design mockups.
