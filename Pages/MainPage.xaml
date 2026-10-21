@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Loyercam.Pages.MainPage"
+    Title="LoyerCam"
+    BackgroundColor="#F4F7FB">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <!-- En-tête -->
+            <Grid ColumnDefinitions="Auto,*"
+                  ColumnSpacing="14"
+                  Padding="16"
+                  BackgroundColor="#142B4A">
+
+                <Button Text="☰"
+                        FontSize="25"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        Padding="5"
+                        VerticalOptions="Center"/>
+
+                <VerticalStackLayout Grid.Column="1"
+                                     Spacing="3"
+                                     VerticalOptions="Center">
+                    <Label Text="LoyerCam"
+                           FontSize="25"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+
+                    <Label Text="Gestion locative simplifiée"
+                           FontSize="12"
+                           TextColor="#DCE7F5"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Présentation -->
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Bonjour, Propriétaire 👋"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#142B4A"/>
+
+                <Label Text="Voici le bilan de votre parc locatif."
+                       FontSize="14"
+                       TextColor="#64748B"/>
+            </VerticalStackLayout>
+
+            <!-- Statistiques -->
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto"
+                  ColumnSpacing="12"
+                  RowSpacing="12">
+
+                <Border Grid.Row="0" Grid.Column="0"
+                        BackgroundColor="White"
+                        Stroke="#E1E8F0"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Loyers perçus"
+                               FontSize="13"
+                               TextColor="#64748B"/>
+                        <Label Text="750 000 FCFA"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#10A878"/>
+                        <Label Text="sur 900 000 FCFA"
+                               FontSize="12"
+                               TextColor="#64748B"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1"
+                        BackgroundColor="White"
+                        Stroke="#E1E8F0"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Logements occupés"
+                               FontSize="13"
+                               TextColor="#64748B"/>
+                        <Label Text="6 / 7"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#142B4A"/>
+                        <Label Text="1 logement disponible"
+                               FontSize="12"
+                               TextColor="#64748B"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="White"
+                        Stroke="#E1E8F0"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Taux de recouvrement"
+                               FontSize="13"
+                               TextColor="#64748B"/>
+                        <Label Text="83,3 %"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#10A878"/>
+                        <Label Text="Loyers encaissés"
+                               FontSize="12"
+                               TextColor="#64748B"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1"
+                        BackgroundColor="White"
+                        Stroke="#F4B4B4"
+                        StrokeShape="RoundRectangle 14"
+                        Padding="14">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Impayés"
+                               FontSize="13"
+                               TextColor="#64748B"/>
+                        <Label Text="150 000 FCFA"
+                               FontSize="17"
+                               FontAttributes="Bold"
+                               TextColor="#D94848"/>
+                        <Label Text="2 retards à suivre"
+                               FontSize="12"
+                               TextColor="#D94848"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Alertes -->
+            <VerticalStackLayout Spacing="12">
+                <Label Text="⚠️ Alertes impayés"
+                       FontSize="19"
+                       FontAttributes="Bold"
+                       TextColor="#D94848"/>
+
+                <Border BackgroundColor="#FFF0F0"
+                        Stroke="#FFD0D0"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="M. KOUAKOU"
+                                   FontAttributes="Bold"
+                                   TextColor="#142B4A"/>
+                            <Label Text="75 000 FCFA · 12 jours de retard"
+                                   FontSize="12"
+                                   TextColor="#B42323"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               TextColor="#D94848"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+
+                <Border BackgroundColor="#FFF7E8"
+                        Stroke="#F5D7A0"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="14">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Mme TCHUENTE"
+                                   FontAttributes="Bold"
+                                   TextColor="#142B4A"/>
+                            <Label Text="75 000 FCFA · 5 jours de retard"
+                                   FontSize="12"
+                                   TextColor="#996515"/>
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1"
+                               Text="›"
+                               FontSize="28"
+                               TextColor="#B7791F"
+                               VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Actions rapides -->
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Actions rapides"
+                       FontSize="19"
+                       FontAttributes="Bold"
+                       TextColor="#142B4A"/>
+
+                <Button Text="+ Enregistrer un loyer"
+                        BackgroundColor="#10A878"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="52"/>
+
+                <Button Text="+ Ajouter un logement"
+                        BackgroundColor="#142B4A"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="52"/>
+
+                <Button Text="+ Ajouter un locataire"
+                        BackgroundColor="#142B4A"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="52"/>
+
+                <Button Text="Générer une quittance"
+                        BackgroundColor="White"
+                        TextColor="#142B4A"
+                        BorderColor="#142B4A"
+                        BorderWidth="1"
+                        CornerRadius="12"
+                        HeightRequest="52"/>
+            </VerticalStackLayout>
+
+            <!-- Note de développement -->
+            <Label Text="LoyerCam · Votre gestion locative en toute sérénité"
+                   FontSize="12"
+                   TextColor="#64748B"
+                   HorizontalTextAlignment="Center"
+                   Margin="0,10,0,10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

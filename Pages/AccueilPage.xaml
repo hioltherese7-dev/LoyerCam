@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Loyercam.Pages.AccueilPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Accueil"
+    BackgroundColor="#F4F7FB">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Bienvenue sur"
+                    FontSize="16"
+                    TextColor="#64748B" />
+
+                <Label
+                    Text="LoyerCam"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    TextColor="#123B70" />
+
+                <Label
+                    Text="Votre gestion locative en un seul endroit."
+                    FontSize="14"
+                    TextColor="#64748B" />
+            </VerticalStackLayout>
+
+            <Border
+                BackgroundColor="#123B70"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="TABLEAU DE BORD"
+                        FontSize="12"
+                        TextColor="#BFDBFE"
+                        FontAttributes="Bold" />
+
+                    <Label
+                        x:Name="DateLabel"
+                        FontSize="14"
+                        TextColor="White" />
+
+                    <Label
+                        Text="Suivez vos logements et vos paiements."
+                        FontSize="14"
+                        TextColor="White" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Text="Vue d'ensemble"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#172B4D" />
+
+            <Grid
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="12"
+                RowSpacing="12">
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="15">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Logements"
+                               FontSize="14"
+                               TextColor="#64748B" />
+                        <Label x:Name="LogementsLabel"
+                               Text="0"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="#2563EB" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="15">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Locataires"
+                               FontSize="14"
+                               TextColor="#64748B" />
+                        <Label x:Name="LocatairesLabel"
+                               Text="0"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="#0F766E" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="15">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Total encaissé"
+                               FontSize="14"
+                               TextColor="#64748B" />
+                        <Label x:Name="EncaisséLabel"
+                               Text="0 FCFA"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#15803D" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="White"
+                    Stroke="#E2E8F0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="15">
+
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Reste à payer"
+                               FontSize="14"
+                               TextColor="#64748B" />
+                        <Label x:Name="ImpayesLabel"
+                               Text="0 FCFA"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#DC2626" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Label
+                Text="Accès rapide"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="#172B4D" />
+
+            <Button
+                Text="🏠  Gérer les logements"
+                Clicked="LogementsButton_Clicked"
+                BackgroundColor="#2563EB"
+                TextColor="White"
+                CornerRadius="12"
+                HeightRequest="52" />
+
+            <Button
+                Text="👥  Gérer les locataires"
+                Clicked="LocatairesButton_Clicked"
+                BackgroundColor="White"
+                TextColor="#123B70"
+                BorderColor="#CBD5E1"
+                BorderWidth="1"
+                CornerRadius="12"
+                HeightRequest="52" />
+
+            <Button
+                Text="💰  Consulter les loyers"
+                Clicked="LoyersButton_Clicked"
+                BackgroundColor="White"
+                TextColor="#123B70"
+                BorderColor="#CBD5E1"
+                BorderWidth="1"
+                CornerRadius="12"
+                HeightRequest="52" />
+
+            <Button
+                Text="⚠️  Voir les impayés"
+                Clicked="ImpayesButton_Clicked"
+                BackgroundColor="White"
+                TextColor="#123B70"
+                BorderColor="#CBD5E1"
+                BorderWidth="1"
+                CornerRadius="12"
+                HeightRequest="52" />
+
+            <Button
+                Text="📄  Consulter les quittances"
+                Clicked="QuittancesButton_Clicked"
+                BackgroundColor="White"
+                TextColor="#123B70"
+                BorderColor="#CBD5E1"
+                BorderWidth="1"
+                CornerRadius="12"
+                HeightRequest="52" />
+
+            <Button
+                Text="Actualiser les chiffres"
+                Clicked="ActualiserButton_Clicked"
+                BackgroundColor="#DBEAFE"
+                TextColor="#1D4ED8"
+                CornerRadius="12"
+                HeightRequest="46" />
+
+            <Label
+                x:Name="MessageLabel"
+                Text=""
+                FontSize="12"
+                TextColor="#64748B"
+                HorizontalTextAlignment="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

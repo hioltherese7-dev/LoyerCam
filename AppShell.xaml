@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Loyercam.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Loyercam.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="LoyerCam">
+
+    <ShellContent
+        Title="Accueil"
+        Route="accueil"
+        ContentTemplate="{DataTemplate pages:AccueilPage}" />
+
+    <ShellContent
+        Title="Logements"
+        Route="logements"
+        ContentTemplate="{DataTemplate pages:LogementsPage}" />
+
+    <ShellContent
+        Title="Locataires"
+        Route="locataires"
+        ContentTemplate="{DataTemplate pages:LocatairesPage}" />
+
+    <ShellContent
+        Title="Loyers"
+        Route="loyers"
+        ContentTemplate="{DataTemplate pages:LoyersPage}" />
+
+    <ShellContent
+        Title="Impayés"
+        Route="impayes"
+        ContentTemplate="{DataTemplate pages:ImpayesPage}" />
+
+    <ShellContent
+        Title="Quittances"
+        Route="quittances"
+        ContentTemplate="{DataTemplate pages:QuittancesPage}" />
+
+</Shell>

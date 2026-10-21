@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Loyercam.Pages.LoyersPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Loyers">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label
+                Text="Gestion des loyers"
+                FontSize="28"
+                FontAttributes="Bold" />
+
+            <Label
+                Text="Enregistrez les loyers et les paiements reçus."
+                FontSize="14"
+                TextColor="Gray" />
+
+            <Border Padding="16"
+                    StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Nouveau paiement"
+                        FontSize="20"
+                        FontAttributes="Bold" />
+
+                    <Picker
+                        x:Name="LocatairePicker"
+                        Title="Choisir un locataire"
+                        ItemDisplayBinding="{Binding NomComplet}" />
+
+                    <Label
+                        x:Name="LogementLabel"
+                        Text="Logement : non sélectionné"
+                        TextColor="Gray" />
+
+                    <Label
+                        x:Name="LoyerMensuelLabel"
+                        Text="Loyer mensuel : —"
+                        TextColor="Gray" />
+
+                    <Entry
+                        x:Name="MontantEntry"
+                        Placeholder="Montant versé en FCFA"
+                        Keyboard="Numeric" />
+
+                    <Picker
+                        x:Name="MoisPicker"
+                        Title="Mois concerné">
+                        <Picker.Items>
+                            <x:String>Janvier</x:String>
+                            <x:String>Février</x:String>
+                            <x:String>Mars</x:String>
+                            <x:String>Avril</x:String>
+                            <x:String>Mai</x:String>
+                            <x:String>Juin</x:String>
+                            <x:String>Juillet</x:String>
+                            <x:String>Août</x:String>
+                            <x:String>Septembre</x:String>
+                            <x:String>Octobre</x:String>
+                            <x:String>Novembre</x:String>
+                            <x:String>Décembre</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Entry
+                        x:Name="AnneeEntry"
+                        Placeholder="Année (ex. 2026)"
+                        Keyboard="Numeric" />
+
+                    <DatePicker x:Name="DatePaiementPicker" />
+
+                    <Picker
+                        x:Name="ModePaiementPicker"
+                        Title="Mode de paiement">
+                        <Picker.Items>
+                            <x:String>Espèces</x:String>
+                            <x:String>Virement bancaire</x:String>
+                            <x:String>Mobile Money</x:String>
+                            <x:String>Chèque</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Button
+                        Text="Enregistrer le paiement"
+                        Clicked="EnregistrerPaiement_Clicked" />
+
+                    <Label
+                        x:Name="MessageLabel"
+                        FontSize="14" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Text="Historique des paiements"
+                FontSize="22"
+                FontAttributes="Bold" />
+
+            <Label
+                x:Name="TotalLabel"
+                Text="Total encaissé : 0 FCFA"
+                FontSize="18"
+                FontAttributes="Bold" />
+
+            <VerticalStackLayout
+                x:Name="ListePaiements"
+                Spacing="10">
+
+                <Label
+                    Text="Aucun paiement enregistré."
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

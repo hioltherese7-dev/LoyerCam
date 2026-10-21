@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Loyercam.Pages.LocatairesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Locataires">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label
+                Text="Gestion des locataires"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="{AppThemeBinding Light=#17365D, Dark=#8AB4F8}" />
+
+            <Label
+                Text="Enregistrez les personnes qui louent vos biens."
+                FontSize="14"
+                TextColor="Gray" />
+
+            <Border
+                Padding="16"
+                Stroke="{AppThemeBinding Light=#D9E2F3, Dark=#444444}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Nouveau locataire"
+                        FontSize="20"
+                        FontAttributes="Bold" />
+
+                    <Entry
+                        x:Name="NomLocataireEntry"
+                        Placeholder="Nom complet du locataire"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Entry
+                        x:Name="TelephoneEntry"
+                        Placeholder="Numéro de téléphone"
+                        Keyboard="Telephone"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Entry
+                        x:Name="PieceEntry"
+                        Placeholder="Numéro de pièce d'identité"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Entry
+                        x:Name="EmailEntry"
+                        Placeholder="Adresse e-mail (facultatif)"
+                        Keyboard="Email"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Label
+                        Text="Date de début de location"
+                        FontAttributes="Bold" />
+
+                    <DatePicker
+                        x:Name="DateDebutLocationPicker"
+                        Format="dd/MM/yyyy" />
+                  
+                        <Label
+                        Text="Logement occupé"
+                        FontAttributes="Bold" />
+
+                    <Picker
+                        x:Name="LogementPicker"
+                        Title="Choisir un logement"
+                        ItemDisplayBinding="{Binding Nom}" />
+
+                    <Button
+                        Text="Enregistrer le locataire"
+                        Clicked="AjouterLocataire_Clicked"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+
+                    <Label
+                        x:Name="MessageLocataireLabel"
+                        FontSize="14" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Text="Liste des locataires"
+                FontSize="22"
+                FontAttributes="Bold" />
+
+            <VerticalStackLayout
+                x:Name="ListeLocataires"
+                Spacing="10">
+
+                <Label
+                    Text="Aucun locataire enregistré."
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Loyercam.Pages.LogementsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Logements">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="Gestion des logements"
+                FontSize="28"
+                FontAttributes="Bold" />
+
+            <Label
+                Text="Ajoutez et gérez les biens immobiliers à louer."
+                FontSize="14"
+                TextColor="Gray" />
+
+            <Border
+                Padding="16"
+                Stroke="#D6DCE5"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label
+                        Text="Nouveau logement"
+                        FontSize="20"
+                        FontAttributes="Bold" />
+
+                    <Entry
+                        x:Name="NomEntry"
+                        Placeholder="Nom du logement"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Entry
+                        x:Name="AdresseEntry"
+                        Placeholder="Adresse ou quartier"
+                        ClearButtonVisibility="WhileEditing" />
+
+                    <Picker
+                        x:Name="TypePicker"
+                        Title="Type de logement">
+                        <Picker.Items>
+                            <x:String>Studio</x:String>
+                            <x:String>Appartement</x:String>
+                            <x:String>Maison</x:String>
+                            <x:String>Chambre</x:String>
+                            <x:String>Local commercial</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Entry
+                        x:Name="LoyerEntry"
+                        Placeholder="Loyer mensuel en FCFA"
+                        Keyboard="Numeric" />
+
+                    <Entry
+                        x:Name="ChambresEntry"
+                        Placeholder="Nombre de chambres"
+                        Keyboard="Numeric" />
+
+                    <Button
+                        Text="Ajouter le logement"
+                        Clicked="AjouterLogement_Clicked"
+                        HeightRequest="50"
+                        CornerRadius="10" />
+
+                    <Label
+                        x:Name="MessageLabel"
+                        FontSize="14"
+                        HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Label
+                Text="Liste des logements"
+                FontSize="22"
+                FontAttributes="Bold" />
+
+            <Label
+                x:Name="NombreLogementsLabel"
+                Text="Nombre de logements : 0"
+                FontSize="14"
+                TextColor="Gray" />
+
+            <VerticalStackLayout
+                x:Name="ListeLogements"
+                Spacing="12">
+
+                <Label
+                    Text="Aucun logement ajouté."
+                    TextColor="Gray" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
