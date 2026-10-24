@@ -20,12 +20,14 @@ public partial class ImpayesPage : ContentPage
     public ImpayesPage()
     {
         InitializeComponent();
+
         ListeImpayes.ItemsSource = _impayes;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
         await ChargerImpayesAsync();
     }
 
@@ -74,8 +76,11 @@ public partial class ImpayesPage : ContentPage
                 var logement = logements.FirstOrDefault(
                     l => l.Id == locataire.LogementId);
 
-                if (logement is null || logement.LoyerMensuel <= 0)
+                if (logement is null ||
+                    logement.LoyerMensuel <= 0)
+                {
                     continue;
+                }
 
                 DateTime premierMois = new(
                     locataire.DateDebutLocation.Year,
@@ -109,8 +114,8 @@ public partial class ImpayesPage : ContentPage
                     await _baseDeDonnees.AjouterLoyerAsync(
                         nouveauLoyer);
 
-                    // Éviter de recréer ce même loyer
-                    // pendant le chargement en cours.
+                    // Empêcher la création en double
+                    // durant le chargement actuel.
                     loyers.Add(nouveauLoyer);
                 }
             }
@@ -121,7 +126,8 @@ public partial class ImpayesPage : ContentPage
             int nombreImpayes = 0;
 
             var loyersEchus = loyers
-                .Where(l => l.DateEcheance.Date <= aujourdHui)
+                .Where(l =>
+                    l.DateEcheance.Date <= aujourdHui)
                 .OrderBy(l => l.DateEcheance)
                 .ToList();
 
@@ -147,11 +153,15 @@ public partial class ImpayesPage : ContentPage
                 _impayes.Add(new ImpayesItem
                 {
                     NomLocataire = locataire.NomComplet,
+
                     NomLogement = logement?.Nom
                         ?? "Logement non trouvé",
+
                     Periode = loyer.Periode,
+
                     EcheanceTexte = loyer.DateEcheance
                         .ToString("dd/MM/yyyy"),
+
                     MontantDu = loyer.MontantDu,
                     MontantPaye = loyer.MontantPaye,
                     ResteDu = reste
@@ -176,6 +186,7 @@ public partial class ImpayesPage : ContentPage
                 $"Impossible de charger les impayés : {ex.Message}",
                 "OK");
         }
+    
         finally
         {
             ActualiserButton.IsEnabled = true;
@@ -187,12 +198,17 @@ public partial class ImpayesPage : ContentPage
 public class ImpayesItem
 {
     public string NomLocataire { get; set; } = "";
+
     public string NomLogement { get; set; } = "";
+
     public string Periode { get; set; } = "";
+
     public string EcheanceTexte { get; set; } = "";
 
     public decimal MontantDu { get; set; }
+
     public decimal MontantPaye { get; set; }
+
     public decimal ResteDu { get; set; }
 
     public string MontantDuTexte =>

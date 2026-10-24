@@ -1,8 +1,10 @@
+
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
 
 namespace Loyercam.Pages;
 
@@ -17,7 +19,8 @@ public partial class LoyersPage : ContentPage
         AnneeEntry.Text = DateTime.Today.Year.ToString();
         DatePaiementPicker.Date = DateTime.Today;
 
-        LocatairePicker.SelectedIndexChanged += LocatairePicker_Changed;
+        LocatairePicker.SelectedIndexChanged +=
+            LocatairePicker_Changed;
     }
 
     protected override async void OnAppearing()
@@ -32,7 +35,8 @@ public partial class LoyersPage : ContentPage
         }
         catch (Exception ex)
         {
-            AfficherMessage($"Erreur de chargement : {ex.Message}", true);
+            AfficherMessage(
+                $"Erreur de chargement : {ex.Message}", true);
         }
     }
 
@@ -51,9 +55,10 @@ public partial class LoyersPage : ContentPage
         }
     }
 
-    private async void LocatairePicker_Changed(object? sender, EventArgs e)
+    private async void LocatairePicker_Changed(
+        object? sender, EventArgs e)
     {
-        if (LocatairePicker.SelectedItem is not Loyercam.Locataire locataire)
+        if (LocatairePicker.SelectedItem is not Locataire locataire)
         {
             LogementLabel.Text = "Logement : non sélectionné";
             LoyerMensuelLabel.Text = "Loyer mensuel : —";
@@ -84,16 +89,18 @@ public partial class LoyersPage : ContentPage
         }
     }
 
-    private async void EnregistrerPaiement_Clicked(object? sender, EventArgs e)
+    private async void EnregistrerPaiement_Clicked(
+        object? sender, EventArgs e)
     {
         if (_enregistrementEnCours)
             return;
 
         _enregistrementEnCours = true;
+        EnregistrerPaiementButton.IsEnabled = false;
 
         try
         {
-            if (LocatairePicker.SelectedItem is not Loyercam.Locataire locataire)
+            if (LocatairePicker.SelectedItem is not Locataire locataire)
             {
                 AfficherMessage("Choisissez un locataire.", true);
                 return;
@@ -119,20 +126,21 @@ public partial class LoyersPage : ContentPage
             if (montant <= 0)
             {
                 AfficherMessage(
-                    "Le montant doit être supérieur à zéro.",
-                    true);
+                    "Le montant doit être supérieur à zéro.", true);
                 return;
             }
 
             if (MoisPicker.SelectedIndex < 0)
             {
-                AfficherMessage("Sélectionnez le mois concerné.", true);
+                AfficherMessage(
+                    "Sélectionnez le mois concerné.", true);
                 return;
             }
 
             if (ModePaiementPicker.SelectedItem is null)
             {
-                AfficherMessage("Sélectionnez le mode de paiement.", true);
+                AfficherMessage(
+                    "Sélectionnez le mode de paiement.", true);
                 return;
             }
 
@@ -165,7 +173,7 @@ public partial class LoyersPage : ContentPage
 
             if (loyer is null)
             {
-                loyer = new Loyercam.Loyer
+                loyer = new Loyer
                 {
                     LocataireId = locataire.Id,
                     Periode = periode,
@@ -176,15 +184,14 @@ public partial class LoyersPage : ContentPage
 
                 await BaseDeDonnees.Instance.AjouterLoyerAsync(loyer);
 
-                // Recharger le loyer pour récupérer son identifiant SQLite.
+                // Récupérer l'identifiant SQLite du loyer créé.
                 loyer = await BaseDeDonnees.Instance
                     .ObtenirLoyerPourPeriodeAsync(locataire.Id, periode);
 
                 if (loyer is null)
                 {
                     AfficherMessage(
-                        "Impossible de retrouver le loyer créé.",
-                        true);
+                        "Impossible de retrouver le loyer créé.", true);
                     return;
                 }
             }
@@ -195,8 +202,7 @@ public partial class LoyersPage : ContentPage
             if (reste <= 0)
             {
                 AfficherMessage(
-                    "Ce loyer est déjà entièrement payé.",
-                    true);
+                    "Ce loyer est déjà entièrement payé.", true);
                 return;
             }
 
@@ -208,17 +214,20 @@ public partial class LoyersPage : ContentPage
                 return;
             }
 
-            var paiement = new Loyercam.Paiement
+            var paiement = new Paiement
             {
                 LoyerId = loyer.Id,
                 Montant = montant,
-                DatePaiement = DatePaiementPicker.Date ?? DateTime.Today,
+                DatePaiement =
+                    DatePaiementPicker.Date ?? DateTime.Today,
                 ModePaiement =
-                    ModePaiementPicker.SelectedItem.ToString() ?? "Espèces"
+                    ModePaiementPicker.SelectedItem.ToString()
+                    ?? "Espèces"
             };
 
             await BaseDeDonnees.Instance.AjouterPaiementAsync(paiement);
 
+            // Réinitialiser le formulaire après l'enregistrement.
             MontantEntry.Text = string.Empty;
             LocatairePicker.SelectedItem = null;
             MoisPicker.SelectedIndex = -1;
@@ -231,18 +240,17 @@ public partial class LoyersPage : ContentPage
             await ChargerHistoriqueAsync();
 
             AfficherMessage(
-                "Paiement enregistré avec succès.",
-                false);
+                "Paiement enregistré avec succès.", false);
         }
         catch (Exception ex)
         {
             AfficherMessage(
-                $"Erreur d'enregistrement : {ex.Message}",
-                true);
+                $"Erreur d'enregistrement : {ex.Message}", true);
         }
         finally
         {
             _enregistrementEnCours = false;
+            EnregistrerPaiementButton.IsEnabled = true;
         }
     }
 
@@ -270,7 +278,9 @@ public partial class LoyersPage : ContentPage
             ListePaiements.Children.Add(new Label
             {
                 Text = "Aucun paiement enregistré.",
-                TextColor = Colors.Gray
+                FontSize = 14,
+                TextColor = Color.FromArgb("#718096"),
+                Margin = new Thickness(2, 8)
             });
 
             return;
@@ -300,57 +310,115 @@ public partial class LoyersPage : ContentPage
 
             var contenu = new VerticalStackLayout
             {
-                Spacing = 6,
-                Children =
+                Spacing = 10
+            };
+
+            // Montant et nom du locataire
+            contenu.Children.Add(new Label
+            {
+                Text = locataire?.NomComplet ?? "Locataire inconnu",
+                FontSize = 17,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Color.FromArgb("#172B4D")
+            });
+
+            var montantCarte = new Border
+            {
+                Padding = new Thickness(12, 10),
+                BackgroundColor = Color.FromArgb("#EAF1FF"),
+                StrokeThickness = 0,
+                StrokeShape = new Microsoft.Maui.Controls.Shapes
+                    .RoundRectangle
                 {
-                    new Label
+                    CornerRadius = 12
+                },
+                Content = new VerticalStackLayout
+                {
+                    Spacing = 3,
+                    Children =
                     {
-                        Text = $"{locataire?.NomComplet ?? "Locataire inconnu"} — {paiement.Montant:N0} FCFA",
-                        FontSize = 18,
-                        FontAttributes = FontAttributes.Bold
-                    },
-                    new Label
-                    {
-                        Text = $"Logement : {logement?.Nom ?? "Introuvable"}"
-                    },
-                    new Label
-                    {
-                        Text = $"Période : {periode}"
-                    },
-                    new Label
-                    {
-                        Text = $"Date du paiement : {paiement.DatePaiement:dd/MM/yyyy}"
-                    },
-                    new Label
-                    {
-                        Text = $"Mode : {paiement.ModePaiement}"
-                    },
-                    new Label
-                    {
-                        Text = $"Solde restant pour cette période : {solde}"
+                        new Label
+                        {
+                            Text = "MONTANT VERSÉ",
+                            FontSize = 10,
+                            FontAttributes = FontAttributes.Bold,
+                            TextColor = Color.FromArgb("#64748B")
+                        },
+                        new Label
+                        {
+                            Text = $"{paiement.Montant:N0} FCFA",
+                            FontSize = 20,
+                            FontAttributes = FontAttributes.Bold,
+                            TextColor = Color.FromArgb("#2563EB")
+                        }
                     }
                 }
             };
 
+            contenu.Children.Add(montantCarte);
+
+            contenu.Children.Add(CreerLigneHistorique(
+                "Logement",
+                logement?.Nom ?? "Introuvable"));
+
+            contenu.Children.Add(CreerLigneHistorique(
+                "Période",
+                periode));
+
+            contenu.Children.Add(CreerLigneHistorique(
+                "Date du paiement",
+                paiement.DatePaiement.ToString("dd/MM/yyyy")));
+
+            contenu.Children.Add(CreerLigneHistorique(
+                "Mode de paiement",
+                paiement.ModePaiement));
+
+            contenu.Children.Add(new BoxView
+            {
+                HeightRequest = 1,
+                Color = Color.FromArgb("#E8EDF5")
+            });
+
+            contenu.Children.Add(new Label
+            {
+                Text = $"Solde restant : {solde}",
+                FontSize = 14,
+                FontAttributes = FontAttributes.Bold,
+                TextColor = Color.FromArgb("#344563")
+            });
+
             ListePaiements.Children.Add(new Border
             {
-                Padding = 14,
-                Stroke = Colors.LightGray,
+                Padding = new Thickness(16),
+                BackgroundColor = Colors.White,
+                Stroke = Color.FromArgb("#E1E8F2"),
                 StrokeThickness = 1,
-                StrokeShape =
-                    new Microsoft.Maui.Controls.Shapes.RoundRectangle
-                    {
-                        CornerRadius = 10
-                    },
+                StrokeShape = new Microsoft.Maui.Controls.Shapes
+                    .RoundRectangle
+                {
+                    CornerRadius = 18
+                },
                 Content = contenu
             });
         }
     }
 
+    private static Label CreerLigneHistorique(
+        string titre, string valeur)
+    {
+        return new Label
+        {
+            Text = $"{titre} : {valeur}",
+            FontSize = 13,
+            TextColor = Color.FromArgb("#64748B")
+        };
+    }
+
     private void AfficherMessage(string message, bool erreur)
     {
         MessageLabel.Text = message;
-        MessageLabel.TextColor =
-            erreur ? Colors.Red : Colors.Green;
+        MessageLabel.TextColor = erreur
+            ? Color.FromArgb("#DC2626")
+            : Color.FromArgb("#16803D");
     }
 }

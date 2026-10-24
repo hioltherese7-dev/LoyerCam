@@ -52,8 +52,6 @@ public class BaseDeDonnees
 
         if (!colonneExiste)
         {
-            // Les anciens locataires recevront provisoirement
-            // la date du jour. Il faudra corriger leur date réelle.
             long dateParDefaut = DateTime.Today.Ticks;
 
             await _database.ExecuteAsync(
@@ -79,6 +77,78 @@ public class BaseDeDonnees
             .Table<Logement>()
             .Where(l => l.Id == id)
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<int> ModifierLogementAsync(Logement logement)
+    {
+        if (logement.Id <= 0)
+        {
+            throw new ArgumentException(
+                "Le logement à modifier est invalide.");
+        }
+
+        var existant =
+            await ObtenirLogementParIdAsync(logement.Id);
+
+        if (existant is null)
+        {
+            throw new InvalidOperationException(
+                "Le logement à modifier n'existe pas.");
+        }
+
+        if (string.IsNullOrWhiteSpace(logement.Nom) ||
+            string.IsNullOrWhiteSpace(logement.Adresse))
+        {
+            throw new ArgumentException(
+                "Le nom et l'adresse du logement sont obligatoires.");
+        }
+
+        if (logement.LoyerMensuel <= 0)
+        {
+            throw new ArgumentException(
+                "Le loyer mensuel doit être supérieur à zéro.");
+        }
+
+        if (logement.NombreChambres < 0)
+        {
+            throw new ArgumentException(
+                "Le nombre de chambres ne peut pas être négatif.");
+        }
+
+        return await _database.UpdateAsync(logement);
+    }
+
+    public async Task<bool> PeutSupprimerLogementAsync(int logementId)
+    {
+        var locataires = await ObtenirLocatairesAsync();
+
+        return !locataires.Any(
+            l => l.LogementId == logementId);
+    }
+
+    public async Task<int> SupprimerLogementAsync(int logementId)
+    {
+        var logement =
+            await ObtenirLogementParIdAsync(logementId);
+
+        if (logement is null)
+        {
+            throw new InvalidOperationException(
+                "Le logement n'existe pas.");
+        }
+
+        bool autorise =
+            await PeutSupprimerLogementAsync(logementId);
+
+        if (!autorise)
+        {
+            throw new InvalidOperationException(
+                "Impossible de supprimer ce logement : " +
+                "il est associé à un locataire. " +
+                "Archivez ou réaffectez d'abord le locataire.");
+        }
+
+        return await _database.DeleteAsync<Logement>(logementId);
     }
 
     // =========================
