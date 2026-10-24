@@ -3,47 +3,116 @@
     x:Class="Loyercam.Pages.LogementsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Logements">
+    Title="Logements"
+    BackgroundColor="#F4F7FC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="18">
+        <VerticalStackLayout Padding="20,22" Spacing="22">
 
-            <Label
-                Text="Gestion des logements"
-                FontSize="28"
-                FontAttributes="Bold" />
+            <!-- En-tête -->
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="Mes logements"
+                    FontSize="29"
+                    FontAttributes="Bold"
+                    TextColor="#172B4D" />
 
-            <Label
-                Text="Ajoutez et gérez les biens immobiliers à louer."
-                FontSize="14"
-                TextColor="Gray" />
+                <Label
+                    Text="Gérez vos biens immobiliers en toute simplicité."
+                    FontSize="14"
+                    TextColor="#718096" />
+            </VerticalStackLayout>
 
+            <!-- Formulaire -->
             <Border
-                Padding="16"
-                Stroke="#D6DCE5"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 12">
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#E1E8F2"
+                StrokeThickness="1">
 
-                <VerticalStackLayout Spacing="12">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Grid ColumnDefinitions="*,Auto"
+                          ColumnSpacing="10">
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                x:Name="FormulaireTitreLabel"
+                                Text="Nouveau logement"
+                                FontSize="20"
+                                FontAttributes="Bold"
+                                TextColor="#172B4D" />
+
+                            <Label
+                                Text="Renseignez les informations du bien."
+                                FontSize="12"
+                                TextColor="#718096" />
+                        </VerticalStackLayout>
+
+                        <Border
+                            Grid.Column="1"
+                            Padding="10,8"
+                            BackgroundColor="#EAF1FF"
+                            StrokeThickness="0"
+                            VerticalOptions="Start">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12" />
+                            </Border.StrokeShape>
+
+                            <Label
+                                Text="⌂"
+                                FontSize="25"
+                                TextColor="#2563EB"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
 
                     <Label
-                        Text="Nouveau logement"
-                        FontSize="20"
-                        FontAttributes="Bold" />
+                        Text="Nom du logement"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Entry
                         x:Name="NomEntry"
-                        Placeholder="Nom du logement"
+                        Placeholder="Ex. Appartement Bonapriso"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6"
                         ClearButtonVisibility="WhileEditing" />
+
+                    <Label
+                        Text="Adresse ou quartier"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Entry
                         x:Name="AdresseEntry"
-                        Placeholder="Adresse ou quartier"
+                        Placeholder="Ex. Douala, Bonapriso"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6"
                         ClearButtonVisibility="WhileEditing" />
+
+                    <Label
+                        Text="Type de logement"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Picker
                         x:Name="TypePicker"
-                        Title="Type de logement">
+                        Title="Choisir un type"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D">
+
                         <Picker.Items>
                             <x:String>Studio</x:String>
                             <x:String>Appartement</x:String>
@@ -53,51 +122,123 @@
                         </Picker.Items>
                     </Picker>
 
+                    <Label
+                        Text="Loyer mensuel (FCFA)"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
+
                     <Entry
                         x:Name="LoyerEntry"
-                        Placeholder="Loyer mensuel en FCFA"
-                        Keyboard="Numeric" />
+                        Placeholder="Ex. 75000"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6" />
+
+                    <Label
+                        Text="Nombre de chambres"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Entry
                         x:Name="ChambresEntry"
-                        Placeholder="Nombre de chambres"
-                        Keyboard="Numeric" />
+                        Placeholder="Ex. 3"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6" />
 
                     <Button
-                        Text="Ajouter le logement"
-                        Clicked="AjouterLogement_Clicked"
-                        HeightRequest="50"
-                        CornerRadius="10" />
+                        x:Name="EnregistrerButton"
+                        Text="＋  Ajouter le logement"
+                        Clicked="EnregistrerLogement_Clicked"
+                        HeightRequest="52"
+                        CornerRadius="12"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        FontAttributes="Bold" />
+
+                    <Button
+                        x:Name="AnnulerModificationButton"
+                        Text="Annuler la modification"
+                        Clicked="AnnulerModification_Clicked"
+                        IsVisible="False"
+                        IsEnabled="False"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        BackgroundColor="#E8EDF5"
+                        TextColor="#344563" />
 
                     <Label
                         x:Name="MessageLabel"
-                        FontSize="14"
-                        HorizontalOptions="Center" />
+                        FontSize="13"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#16803D" />
 
                 </VerticalStackLayout>
             </Border>
 
-            <Label
-                Text="Liste des logements"
-                FontSize="22"
-                FontAttributes="Bold" />
+            <!-- Liste des logements -->
+            <VerticalStackLayout Spacing="5">
 
-            <Label
-                x:Name="NombreLogementsLabel"
-                Text="Nombre de logements : 0"
-                FontSize="14"
-                TextColor="Gray" />
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="8">
 
-            <VerticalStackLayout
-                x:Name="ListeLogements"
-                Spacing="12">
+                    <Label
+                        Text="Mes biens immobiliers"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#172B4D"
+                        VerticalOptions="Center" />
+
+                    <Border
+                        Grid.Column="1"
+                        Padding="11,7"
+                        BackgroundColor="#EAF1FF"
+                        StrokeThickness="0"
+                        VerticalOptions="Center">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Label
+                            x:Name="NombreLogementsLabel"
+                            Text="0 logement"
+                            FontSize="12"
+                            FontAttributes="Bold"
+                            TextColor="#2563EB" />
+                    </Border>
+                </Grid>
 
                 <Label
-                    Text="Aucun logement ajouté."
-                    TextColor="Gray" />
+                    Text="Retrouvez ici les logements enregistrés."
+                    FontSize="13"
+                    TextColor="#718096" />
 
             </VerticalStackLayout>
 
+            <VerticalStackLayout
+                x:Name="ListeLogements"
+                Spacing="14">
+
+                <Label
+                    Text="Aucun logement ajouté."
+                    FontSize="14"
+                    TextColor="#718096" />
+
+            </VerticalStackLayout>
+
+            <Label
+                Text="LoyerCam • Gestion immobilière"
+                FontSize="11"
+                TextColor="#9AA6B6"
+                HorizontalOptions="Center"
+                Margin="0,4,0,10" />
+
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

@@ -3,118 +3,322 @@
     x:Class="Loyercam.Pages.LoyersPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Loyers">
+    Title="Loyers"
+    BackgroundColor="#F4F7FC">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16">
+        <VerticalStackLayout Padding="20,22" Spacing="22">
 
-            <Label
-                Text="Gestion des loyers"
-                FontSize="28"
-                FontAttributes="Bold" />
+            <!-- En-tête -->
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="Gestion des loyers"
+                    FontSize="29"
+                    FontAttributes="Bold"
+                    TextColor="#172B4D" />
 
-            <Label
-                Text="Enregistrez les loyers et les paiements reçus."
-                FontSize="14"
-                TextColor="Gray" />
+                <Label
+                    Text="Suivez les loyers et les paiements de vos locataires."
+                    FontSize="14"
+                    TextColor="#718096" />
+            </VerticalStackLayout>
 
-            <Border Padding="16"
-                    StrokeShape="RoundRectangle 12">
-                <VerticalStackLayout Spacing="12">
+            <!-- Résumé des encaissements -->
+            <Border
+                Padding="18"
+                BackgroundColor="#2563EB"
+                StrokeThickness="0">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="TOTAL DES PAIEMENTS ENCAISSÉS"
+                        FontSize="11"
+                        FontAttributes="Bold"
+                        TextColor="#DBEAFE" />
+
+                    <Label
+                        x:Name="TotalLabel"
+                        Text="Total encaissé : 0 FCFA"
+                        FontSize="23"
+                        FontAttributes="Bold"
+                        TextColor="White" />
+
+                    <Label
+                        Text="Montant cumulé des paiements enregistrés."
+                        FontSize="12"
+                        TextColor="#DBEAFE" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Formulaire de paiement -->
+            <Border
+                Padding="18"
+                BackgroundColor="White"
+                Stroke="#E1E8F2"
+                StrokeThickness="1">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="14">
 
                     <Label
                         Text="Nouveau paiement"
-                        FontSize="20"
-                        FontAttributes="Bold" />
-
-                    <Picker
-                        x:Name="LocatairePicker"
-                        Title="Choisir un locataire"
-                        ItemDisplayBinding="{Binding NomComplet}" />
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#172B4D" />
 
                     <Label
-                        x:Name="LogementLabel"
-                        Text="Logement : non sélectionné"
-                        TextColor="Gray" />
+                        Text="Sélectionnez le locataire concerné."
+                        FontSize="13"
+                        TextColor="#718096" />
+
+                    <BoxView
+                        HeightRequest="1"
+                        Color="#E8EDF5" />
 
                     <Label
-                        x:Name="LoyerMensuelLabel"
-                        Text="Loyer mensuel : —"
-                        TextColor="Gray" />
+                        Text="Locataire *"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
+
+                    <Border
+                        Padding="8,4"
+                        BackgroundColor="#F7F9FC"
+                        Stroke="#E1E8F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Picker
+                            x:Name="LocatairePicker"
+                            Title="Choisir un locataire"
+                            ItemDisplayBinding="{Binding NomComplet}"
+                            TextColor="#172B4D" />
+                    </Border>
+
+                    <Border
+                        Padding="12"
+                        BackgroundColor="#F0F7FF"
+                        StrokeThickness="0">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+
+                        <VerticalStackLayout Spacing="8">
+                            <Label
+                                Text="INFORMATIONS DU LOGEMENT"
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                TextColor="#64748B" />
+
+                            <Label
+                                x:Name="LogementLabel"
+                                Text="Logement : non sélectionné"
+                                FontSize="13"
+                                TextColor="#344563" />
+
+                            <Label
+                                x:Name="LoyerMensuelLabel"
+                                Text="Loyer mensuel : —"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                TextColor="#2563EB" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <BoxView
+                        HeightRequest="1"
+                        Color="#E8EDF5" />
+
+                    <Label
+                        Text="Montant versé (FCFA) *"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Entry
                         x:Name="MontantEntry"
-                        Placeholder="Montant versé en FCFA"
-                        Keyboard="Numeric" />
+                        Placeholder="Ex. 75000"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6" />
 
-                    <Picker
-                        x:Name="MoisPicker"
-                        Title="Mois concerné">
-                        <Picker.Items>
-                            <x:String>Janvier</x:String>
-                            <x:String>Février</x:String>
-                            <x:String>Mars</x:String>
-                            <x:String>Avril</x:String>
-                            <x:String>Mai</x:String>
-                            <x:String>Juin</x:String>
-                            <x:String>Juillet</x:String>
-                            <x:String>Août</x:String>
-                            <x:String>Septembre</x:String>
-                            <x:String>Octobre</x:String>
-                            <x:String>Novembre</x:String>
-                            <x:String>Décembre</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <Label
+                        Text="Période concernée"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#172B4D" />
+
+                    <Label
+                        Text="Mois *"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
+
+                    <Border
+                        Padding="8,4"
+                        BackgroundColor="#F7F9FC"
+                        Stroke="#E1E8F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Picker
+                            x:Name="MoisPicker"
+                            Title="Choisir le mois"
+                            TextColor="#172B4D">
+
+                            <Picker.Items>
+                                <x:String>Janvier</x:String>
+                                <x:String>Février</x:String>
+                                <x:String>Mars</x:String>
+                                <x:String>Avril</x:String>
+                                <x:String>Mai</x:String>
+                                <x:String>Juin</x:String>
+                                <x:String>Juillet</x:String>
+                                <x:String>Août</x:String>
+                                <x:String>Septembre</x:String>
+                                <x:String>Octobre</x:String>
+                                <x:String>Novembre</x:String>
+                                <x:String>Décembre</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Border>
+
+                    <Label
+                        Text="Année *"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
                     <Entry
                         x:Name="AnneeEntry"
-                        Placeholder="Année (ex. 2026)"
-                        Keyboard="Numeric" />
+                        Placeholder="Ex. 2026"
+                        Keyboard="Numeric"
+                        BackgroundColor="#F7F9FC"
+                        TextColor="#172B4D"
+                        PlaceholderColor="#9AA6B6" />
 
-                    <DatePicker x:Name="DatePaiementPicker" />
+                    <Label
+                        Text="Date de réception du paiement"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
 
-                    <Picker
-                        x:Name="ModePaiementPicker"
-                        Title="Mode de paiement">
-                        <Picker.Items>
-                            <x:String>Espèces</x:String>
-                            <x:String>Virement bancaire</x:String>
-                            <x:String>Mobile Money</x:String>
-                            <x:String>Chèque</x:String>
-                        </Picker.Items>
-                    </Picker>
+                    <Border
+                        Padding="8,4"
+                        BackgroundColor="#F7F9FC"
+                        Stroke="#E1E8F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <DatePicker
+                            x:Name="DatePaiementPicker"
+                            Format="dd/MM/yyyy"
+                            TextColor="#172B4D" />
+                    </Border>
+
+                    <Label
+                        Text="Mode de paiement *"
+                        FontSize="13"
+                        FontAttributes="Bold"
+                        TextColor="#344563" />
+
+                    <Border
+                        Padding="8,4"
+                        BackgroundColor="#F7F9FC"
+                        Stroke="#E1E8F2"
+                        StrokeThickness="1">
+
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
+
+                        <Picker
+                            x:Name="ModePaiementPicker"
+                            Title="Choisir le mode de paiement"
+                            TextColor="#172B4D">
+
+                            <Picker.Items>
+                                <x:String>Espèces</x:String>
+                                <x:String>Virement bancaire</x:String>
+                                <x:String>Mobile Money</x:String>
+                                <x:String>Chèque</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </Border>
+
+                    <Label
+                        Text="Les champs marqués d'un * sont obligatoires."
+                        FontSize="11"
+                        TextColor="#718096" />
 
                     <Button
-                        Text="Enregistrer le paiement"
-                        Clicked="EnregistrerPaiement_Clicked" />
+                        x:Name="EnregistrerPaiementButton"
+                        Text="＋  Enregistrer le paiement"
+                        Clicked="EnregistrerPaiement_Clicked"
+                        HeightRequest="52"
+                        CornerRadius="12"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        FontAttributes="Bold" />
 
                     <Label
                         x:Name="MessageLabel"
-                        FontSize="14" />
+                        FontSize="13"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#16803D" />
 
                 </VerticalStackLayout>
             </Border>
 
-            <Label
-                Text="Historique des paiements"
-                FontSize="22"
-                FontAttributes="Bold" />
+            <!-- Historique -->
+            <VerticalStackLayout Spacing="5">
+                <Label
+                    Text="Historique des paiements"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="#172B4D" />
 
-            <Label
-                x:Name="TotalLabel"
-                Text="Total encaissé : 0 FCFA"
-                FontSize="18"
-                FontAttributes="Bold" />
+                <Label
+                    Text="Consultez les versements et les soldes restants."
+                    FontSize="13"
+                    TextColor="#718096" />
+            </VerticalStackLayout>
 
             <VerticalStackLayout
                 x:Name="ListePaiements"
-                Spacing="10">
+                Spacing="14">
 
                 <Label
                     Text="Aucun paiement enregistré."
-                    TextColor="Gray" />
+                    FontSize="14"
+                    TextColor="#718096" />
 
             </VerticalStackLayout>
+
+            <Label
+                Text="LoyerCam • Gestion immobilière"
+                FontSize="11"
+                TextColor="#9AA6B6"
+                HorizontalOptions="Center"
+                Margin="0,4,0,10" />
 
         </VerticalStackLayout>
     </ScrollView>

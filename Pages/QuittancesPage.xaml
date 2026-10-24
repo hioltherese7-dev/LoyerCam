@@ -4,222 +4,386 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Loyercam.Pages.QuittancesPage"
     Title="Quittances"
-    BackgroundColor="#F5F7FB">
+    BackgroundColor="#F4F7FC">
 
     <Grid Padding="20"
           RowDefinitions="Auto,Auto,Auto,*"
           RowSpacing="16">
 
-        <VerticalStackLayout Grid.Row="0" Spacing="4">
+        <!-- En-tête -->
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="5">
+
             <Label Text="Quittances de loyer"
                    FontSize="26"
                    FontAttributes="Bold"
-                   TextColor="#172554" />
-            <Label Text="Retrouvez les paiements enregistrés."
+                   TextColor="#172B4D" />
+
+            <Label Text="Consultez les paiements et gérez vos reçus PDF."
                    FontSize="14"
-                   TextColor="#64748B" />
+                   TextColor="#718096" />
+
         </VerticalStackLayout>
 
+        <!-- Résumé financier -->
         <Border Grid.Row="1"
-                Padding="16"
+                Padding="20"
                 BackgroundColor="White"
-                Stroke="#E2E8F0"
-                StrokeShape="RoundRectangle 14">
-            <VerticalStackLayout Spacing="6">
-                <Label Text="TOTAL DES PAIEMENTS AFFICHÉS"
-                       FontSize="12"
-                       FontAttributes="Bold"
-                       TextColor="#64748B" />
-                <Label x:Name="TotalPaiementsLabel"
-                       Text="0 FCFA"
-                       FontSize="26"
-                       FontAttributes="Bold"
-                       TextColor="#15803D" />
-                <Label x:Name="NombrePaiementsLabel"
-                       Text="0 paiement"
-                       FontSize="13"
-                       TextColor="#64748B" />
+                Stroke="#E1E8F2"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18">
+
+            <VerticalStackLayout Spacing="12">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="10">
+
+                    <VerticalStackLayout Grid.Column="0"
+                                         Spacing="6">
+
+                        <Label Text="TOTAL DES PAIEMENTS AFFICHÉS"
+                               FontSize="11"
+                               FontAttributes="Bold"
+                               TextColor="#718096" />
+
+                        <Label x:Name="TotalPaiementsLabel"
+                               Text="0 FCFA"
+                               FontSize="28"
+                               FontAttributes="Bold"
+                               TextColor="#15803D" />
+
+                    </VerticalStackLayout>
+
+                    <Border Grid.Column="1"
+                            WidthRequest="48"
+                            HeightRequest="48"
+                            Padding="0"
+                            BackgroundColor="#EAF8EF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 14"
+                            VerticalOptions="Center">
+
+                        <Label Text="✓"
+                               FontSize="26"
+                               FontAttributes="Bold"
+                               TextColor="#15803D"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+
+                    </Border>
+
+                </Grid>
+
+                <BoxView HeightRequest="1"
+                         Color="#E9EEF5" />
+
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="8">
+
+                    <Label Grid.Column="0"
+                           Text="●"
+                           FontSize="12"
+                           TextColor="#15803D"
+                           VerticalOptions="Center" />
+
+                    <Label x:Name="NombrePaiementsLabel"
+                           Grid.Column="1"
+                           Text="0 paiement"
+                           FontSize="13"
+                           TextColor="#64748B"
+                           VerticalOptions="Center" />
+
+                </Grid>
+
             </VerticalStackLayout>
+
         </Border>
 
-        <VerticalStackLayout Grid.Row="2" Spacing="10">
-            <SearchBar x:Name="RechercheEntry"
-                       Placeholder="Rechercher un locataire ou une période"
-                       TextChanged="RechercheEntry_TextChanged"
-                       BackgroundColor="White" />
+        <!-- Recherche et actualisation -->
+        <VerticalStackLayout Grid.Row="2"
+                             Spacing="10">
+
+            <Border Padding="4,0"
+                    BackgroundColor="White"
+                    Stroke="#E1E8F2"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12">
+
+                <SearchBar x:Name="RechercheEntry"
+                           Placeholder="Locataire, logement, période..."
+                           TextChanged="RechercheEntry_TextChanged"
+                           BackgroundColor="Transparent"
+                           TextColor="#172B4D"
+                           PlaceholderColor="#94A3B8"
+                           CancelButtonColor="#2563EB" />
+
+            </Border>
 
             <Button x:Name="ActualiserButton"
-                    Text="Actualiser l'historique"
+                    Text="↻  Actualiser l'historique"
                     Clicked="ActualiserButton_Clicked"
-                    BackgroundColor="#1D4ED8"
+                    BackgroundColor="#2563EB"
                     TextColor="White"
-                    CornerRadius="10"
-                    HeightRequest="46" />
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    HeightRequest="48" />
 
             <Label x:Name="MessageLabel"
                    Text=""
                    FontSize="13"
                    TextColor="#64748B" />
+
         </VerticalStackLayout>
 
+        <!-- Historique des paiements -->
         <CollectionView Grid.Row="3"
                         x:Name="ListeQuittances"
-                        SelectionMode="None">
+                        SelectionMode="None"
+                        ItemsLayout="VerticalList">
 
             <CollectionView.EmptyView>
-                <VerticalStackLayout Padding="20"
-                                     Spacing="8"
+
+                <VerticalStackLayout Padding="24"
+                                     Spacing="12"
                                      VerticalOptions="Center"
                                      HorizontalOptions="Center">
+
+                    <Border WidthRequest="68"
+                            HeightRequest="68"
+                            Padding="0"
+                            BackgroundColor="#EAF1FF"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22"
+                            HorizontalOptions="Center">
+
+                        <Label Text="▤"
+                               FontSize="32"
+                               TextColor="#2563EB"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+
+                    </Border>
+
                     <Label Text="Aucun paiement trouvé"
                            FontSize="18"
                            FontAttributes="Bold"
-                           TextColor="#334155"
+                           TextColor="#172B4D"
                            HorizontalTextAlignment="Center" />
-                    <Label Text="Les paiements enregistrés apparaîtront ici."
+
+                    <Label Text="Les paiements enregistrés apparaîtront ici. Essayez de modifier votre recherche si nécessaire."
                            FontSize="14"
-                           TextColor="#64748B"
-                           HorizontalTextAlignment="Center" />
+                           TextColor="#718096"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           MaximumWidthRequest="300" />
+
                 </VerticalStackLayout>
+
             </CollectionView.EmptyView>
 
             <CollectionView.ItemTemplate>
+
                 <DataTemplate>
-                    <Border Margin="0,0,0,12"
-                            Padding="16"
+
+                    <Border Margin="0,0,0,14"
+                            Padding="18"
                             BackgroundColor="White"
-                            Stroke="#E2E8F0"
-                            StrokeShape="RoundRectangle 12">
+                            Stroke="#E1E8F2"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 16">
 
-                        <VerticalStackLayout Spacing="9">
+                        <VerticalStackLayout Spacing="14">
 
+                            <!-- Locataire et montant -->
                             <Grid ColumnDefinitions="*,Auto"
-                                  ColumnSpacing="8">
-                                <Label Grid.Column="0"
-                                       Text="{Binding NomLocataire}"
-                                       FontSize="17"
-                                       FontAttributes="Bold"
-                                       TextColor="#172554" />
+                                  ColumnSpacing="10">
 
-                                <Label Grid.Column="1"
-                                       Text="{Binding MontantTexte}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="#15803D" />
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Spacing="5">
+
+                                    <Label Text="{Binding NomLocataire}"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           TextColor="#172B4D"
+                                           LineBreakMode="WordWrap" />
+
+                                    <Label Text="{Binding NomLogement}"
+                                           FontSize="13"
+                                           TextColor="#718096"
+                                           LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="5"
+                                                     HorizontalOptions="End"
+                                                     VerticalOptions="Start">
+
+                                    <Label Text="MONTANT PAYÉ"
+                                           FontSize="9"
+                                           FontAttributes="Bold"
+                                           TextColor="#718096"
+                                           HorizontalTextAlignment="End" />
+
+                                    <Label Text="{Binding MontantTexte}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#15803D"
+                                           HorizontalTextAlignment="End" />
+
+                                </VerticalStackLayout>
+
                             </Grid>
 
-                            <Label Text="{Binding NomLogement}"
-                                   FontSize="13"
-                                   TextColor="#64748B" />
-
                             <BoxView HeightRequest="1"
-                                     Color="#E2E8F0" />
+                                     Color="#E9EEF5" />
 
+                            <!-- Période et date -->
                             <Grid ColumnDefinitions="*,*"
-                                  RowDefinitions="Auto,Auto"
-                                  ColumnSpacing="12"
-                                  RowSpacing="10">
+                                  ColumnSpacing="12">
 
-                                <VerticalStackLayout Grid.Row="0"
-                                                     Grid.Column="0"
-                                                     Spacing="3">
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Spacing="5">
+
                                     <Label Text="Période du loyer"
                                            FontSize="12"
-                                           TextColor="#64748B" />
+                                           TextColor="#718096" />
+
                                     <Label Text="{Binding Periode}"
                                            FontSize="14"
                                            FontAttributes="Bold"
                                            TextColor="#334155" />
+
                                 </VerticalStackLayout>
 
-                                <VerticalStackLayout Grid.Row="0"
-                                                     Grid.Column="1"
-                                                     Spacing="3">
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="5">
+
                                     <Label Text="Date du paiement"
                                            FontSize="12"
-                                           TextColor="#64748B" />
+                                           TextColor="#718096" />
+
                                     <Label Text="{Binding DatePaiementTexte}"
                                            FontSize="14"
+                                           FontAttributes="Bold"
                                            TextColor="#334155" />
-                                </VerticalStackLayout>
 
-                                <VerticalStackLayout Grid.Row="1"
-                                                     Grid.Column="0"
-                                                     Spacing="3">
-                                    <Label Text="Mode de paiement"
-                                           FontSize="12"
-                                           TextColor="#64748B" />
-                                    <Label Text="{Binding ModePaiement}"
-                                           FontSize="14"
-                                           TextColor="#334155" />
-                                </VerticalStackLayout>
-
-                                <VerticalStackLayout Grid.Row="1"
-                                                     Grid.Column="1"
-                                                     Spacing="3">
-                                    <Label Text="Référence"
-                                           FontSize="12"
-                                           TextColor="#64748B" />
-                                    <Label Text="{Binding ReferenceTexte}"
-                                           FontSize="14"
-                                           TextColor="#334155" />
                                 </VerticalStackLayout>
 
                             </Grid>
 
-                            <Border Padding="10"
+                            <!-- Mode et référence -->
+                            <Grid ColumnDefinitions="*,*"
+                                  ColumnSpacing="12">
+
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Spacing="5">
+
+                                    <Label Text="Mode de paiement"
+                                           FontSize="12"
+                                           TextColor="#718096" />
+
+                                    <Label Text="{Binding ModePaiement}"
+                                           FontSize="14"
+                                           TextColor="#334155"
+                                           LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Spacing="5">
+
+                                    <Label Text="Référence"
+                                           FontSize="12"
+                                           TextColor="#718096" />
+
+                                    <Label Text="{Binding ReferenceTexte}"
+                                           FontSize="14"
+                                           TextColor="#334155"
+                                           LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                            </Grid>
+
+                            <!-- Solde restant -->
+                            <Border Padding="13"
                                     BackgroundColor="#F0FDF4"
-                                    Stroke="#BBF7D0"
-                                    StrokeShape="RoundRectangle 8">
+                                    Stroke="#D1FAE5"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 12">
 
                                 <Grid ColumnDefinitions="*,Auto"
                                       ColumnSpacing="8">
-                                    <Label Grid.Column="0"
-                                           Text="Reste à payer sur ce loyer"
-                                           FontSize="13"
-                                           TextColor="#166534"
-                                           VerticalOptions="Center" />
+
+                                    <VerticalStackLayout Grid.Column="0"
+                                                         Spacing="4"
+                                                         VerticalOptions="Center">
+
+                                        <Label Text="SOLDE RESTANT"
+                                               FontSize="11"
+                                               FontAttributes="Bold"
+                                               TextColor="#166534" />
+
+                                        <Label Text="À payer sur ce loyer"
+                                               FontSize="12"
+                                               TextColor="#4B8060" />
+
+                                    </VerticalStackLayout>
 
                                     <Label Grid.Column="1"
                                            Text="{Binding ResteDuTexte}"
-                                           FontSize="14"
+                                           FontSize="15"
                                            FontAttributes="Bold"
                                            TextColor="#166534"
-                                           VerticalOptions="Center" />
+                                           VerticalOptions="Center"
+                                           HorizontalTextAlignment="End" />
+
                                 </Grid>
+
                             </Border>
 
-                            <!-- Boutons de génération et de partage PDF -->
+                            <!-- Actions PDF -->
                             <Grid ColumnDefinitions="*,*"
                                   ColumnSpacing="10">
 
                                 <Button Grid.Column="0"
-                                        Text="Enregistrer PDF"
+                                        Text="↓  Enregistrer PDF"
                                         FontSize="12"
-                                        Padding="6"
-                                        BackgroundColor="#1D4ED8"
+                                        FontAttributes="Bold"
+                                        Padding="8"
+                                        BackgroundColor="#2563EB"
                                         TextColor="White"
-                                        CornerRadius="8"
+                                        CornerRadius="10"
+                                        HeightRequest="46"
                                         CommandParameter="{Binding .}"
                                         Clicked="EnregistrerPdfButton_Clicked" />
 
                                 <Button Grid.Column="1"
-                                        Text="Partager PDF"
+                                        Text="↗  Partager PDF"
                                         FontSize="12"
-                                        Padding="6"
+                                        FontAttributes="Bold"
+                                        Padding="8"
                                         BackgroundColor="#15803D"
                                         TextColor="White"
-                                        CornerRadius="8"
+                                        CornerRadius="10"
+                                        HeightRequest="46"
                                         CommandParameter="{Binding .}"
                                         Clicked="PartagerPdfButton_Clicked" />
 
                             </Grid>
 
                         </VerticalStackLayout>
+
                     </Border>
+
                 </DataTemplate>
+
             </CollectionView.ItemTemplate>
+
         </CollectionView>
 
     </Grid>
+
 </ContentPage>
